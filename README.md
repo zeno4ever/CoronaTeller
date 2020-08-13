@@ -15,4 +15,3 @@ De CoronaTeller houd geen gegevens bij, het laat alleen de beacons zien die de l
 - Raspberry 4 (ivm bleutooth optie)
 - Raspberry Pi OS (32-bit) with desktop and recommended software, version May 2020
 - python 3 with the following libarys : pygame, pybluez
-- etc.
