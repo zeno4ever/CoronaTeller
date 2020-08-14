@@ -1,6 +1,7 @@
-import pygame
+# test en zo c
+import pygame, random
 from hashlib import sha256
-import random
+#import random
 
 #Classes and other objects
 class Beacon:
@@ -21,6 +22,27 @@ class Beacon:
 #    def __iter__(cls):
 #        return iter(cls._registry)
 
+beaconlist = []
+for i in range(1, 40):
+    beaconlist.append(Beacon(sha256(('Covid19'+str(i)).encode('utf-8')).hexdigest(),
+                             random.randint(0, 255), 0,i))
+
+for i in range(0,100):
+    for beaconobject in reversed(beaconlist):
+        print(beaconobject.age, beaconobject.y)
+        if (beaconobject.age > 0):
+            beaconobject.age -= 1
+        else:
+            spot = beaconobject.y
+            beaconlist.remove(beaconobject)
+            #find empty spot
+            beaconlist.append(Beacon(sha256(('Covid19'+str(i)).encode('utf-8')).hexdigest(),
+                                     random.randint(0, 255), 0, spot))
+
+    print('-----------')
+quit()
+
+
 
 pygame.init()
 #screen = pygame.display.set_mode((400, 300))
@@ -32,6 +54,7 @@ done = False
 is_blue = True
 x = 30
 y = 30
+coronabeacons = 0
 
 pygame.display.set_caption('CoronaTeller')
 
@@ -57,11 +80,6 @@ shafont = pygame.font.SysFont("consolasttf", 30)
 
 progresbar = 0
 
-beaconlist = []
-for i in range(1, 40):
-    beaconlist.append(Beacon(sha256(('Covid19'+str(i)).encode('utf-8')).hexdigest(),
-                             random.randint(0, 255), random.randint(0, screenX), random.randint(0, screenY)))
-
 
 
 
@@ -76,15 +94,12 @@ while not done:
 
     pressed = pygame.key.get_pressed()
     if pressed[pygame.K_UP]:
-        y -= 3
-    if pressed[pygame.K_DOWN]: y += 3
-    if pressed[pygame.K_LEFT]:
-        x -= 3
-    if pressed[pygame.K_RIGHT]: x += 3
-
-    if is_blue:
-        color = (0, 128, 255)
-    else: color = (255, 100, 0)
+        coronabeacons -= 1
+    if pressed[pygame.K_DOWN]:
+        coronabeacons += 1
+    #if pressed[pygame.K_LEFT]:
+    #    x -= 1
+    #if pressed[pygame.K_RIGHT]: x += 1
 
     screen.fill((black))
 
@@ -96,7 +111,7 @@ while not done:
             beaconobject.txthash+beaconobject.txthash, True, (0, 0, beaconobject.age))
         shatextRect = shatext.get_rect()
         #shatextRect.topleft = (beaconobject.x, beaconobject.y)
-        shatextRect.topleft = (10, y)
+        shatextRect.topleft = (10, beaconobject.y*35)
 
         # set the center of the rectangular object.
         # textRect.center = (screenX // 2, screenY // 2)
@@ -124,7 +139,7 @@ while not done:
 
 
     #counter
-    text = font.render('Covid-19# '+ str(x), True, green)
+    text = font.render('Covid-19# ' + str(coronabeacons), True, green)
 
     # create a rectangular object for the
     # text surface object
