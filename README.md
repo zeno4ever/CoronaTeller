@@ -14,4 +14,8 @@ De CoronaTeller houd geen gegevens bij, het laat alleen de beacons zien die de l
 ## Needed hardware / software
 - Raspberry 4 (ivm bleutooth optie)
 - Raspberry Pi OS (32-bit) with desktop and recommended software, version May 2020
-- python 3 with the following libarys : pygame, pybluez
+
+
+sudo apt-get install bluetooth libbluetooth-dev bluez bluez-hcidump  libboost-python-dev libboost-thread-dev libglib2.0-dev
+pip3 install pygame, pybluez, gattlib
+sudo setcap 'cap_net_raw,cap_net_admin+eip' /usr/bin/python3.7
