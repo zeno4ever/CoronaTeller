@@ -37,7 +37,7 @@ Open a terminal and enter commands :
 
 ```bash
 	pip3 install beacontool pybluez
-    sudo setcap 'cap_net_raw,cap_net_admin+eip' /usr/bin/python3.7
+    	sudo setcap 'cap_net_raw,cap_net_admin+eip' /usr/bin/python3.7
 	cd #make sure that you are in your home dir
 	git clone https://github.com/zeno4ever/CoronaTeller.git
 ```
@@ -50,7 +50,6 @@ If you want to start the CoronaTeller every time the Pi reboot execute the follo
 	mkdir ~/.config/autostart
 	cp ~/CoronaTeller/helper/CoronaTeller.desktop ~/.config/autostart
 	cp ~/CoronaTeller/helper/start.sh ~
-
 ```
 
 ## The Extras
