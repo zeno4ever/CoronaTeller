@@ -1,5 +1,9 @@
 #!/bin/sh
-sleep 10
+sleep 5
 cd /
 cd /home/pi/CoronaTeller
-python3 CoronaTeller.py
+while : #restart app if it crash
+do
+	python3 CoronaTeller.py
+	sleep 10
+done
