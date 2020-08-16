@@ -1,8 +1,23 @@
 #!/usr/bin/env python3
-import pygame, random, time
+import pygame
+import random
+import time
+import importlib
+#import sys
 from hashlib import md5
 from datetime import datetime
-from beacontools import BeaconScanner, ExposureNotificationFrame
+
+beacontoolsModule = importlib.util.find_spec("beacontools")
+
+if beacontoolsModule:
+    from beacontools import BeaconScanner, ExposureNotificationFrame
+else:
+    print('Beacontools not found!! ')
+    print('CoronaTeller will not scan any beacons. Continue? [Y/N]')
+    #sys.stdout.write('CoronaTeller will not scan any beacons. Continue? [Y/N]')
+    choice = input().lower()
+    if choice == 'n':
+        quit()
 
 # maxium beacons that fits onscreen
 maxscreenBeacons = 18*2  # 18 lines 2 coloms
@@ -16,10 +31,11 @@ def callback(bt_addr, rssi, packet, additional_info):
         addbeacon(Beacon(txthash))
     
 # scan for all COVID-19 exposure notifications
-scanner = BeaconScanner(callback, 
-    packet_filter=[ExposureNotificationFrame]
-)
-scanner.start()
+if beacontoolsModule:
+    scanner = BeaconScanner(callback,
+                            packet_filter=[ExposureNotificationFrame]
+    )
+    scanner.start()
 
 #Classes and other objects
 class Beacon:
@@ -89,7 +105,7 @@ pygame.init()
 
 screen = pygame.display.set_mode((1920, 1080), pygame.FULLSCREEN)
 screenX, screenY = pygame.display.get_surface().get_size()
-screen.fill((green))
+screen.fill((green))    
 pygame.display.flip()
 
 pygame.display.set_caption('CoronaTeller')
@@ -105,10 +121,12 @@ while not done:
     now = time.time()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            scanner.stop()
+            if beacontoolsModule:
+                scanner.stop()
             done = True
         if event.type == pygame.KEYDOWN and event.key == pygame.K_q:
-            scanner.stop()
+            if beacontoolsModule:
+                scanner.stop()
             done = True
         if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
             fillfakebeacon(7)
@@ -161,6 +179,7 @@ while not done:
             shatextRect.topleft = (x, y )
             screen.blit(shatext, shatextRect)
 
+
     #number of found beacons
     text = font.render(str(len(beaconlist)), True, green)
     textRect = text.get_rect()
@@ -179,6 +198,13 @@ while not done:
     textRect = scan_text.get_rect()
     textRect.bottomright = (screenX-10, screenY-10)
     screen.blit(scan_text, textRect)
+
+    #demo mode
+    if not beacontoolsModule:
+        text = footerfontsmall.render('DEMO MODE', True, green)
+        textRect = text.get_rect()
+        textRect.bottomleft = (10, screenY-10)
+        screen.blit(text, textRect)
 
     pygame.display.flip()
 
