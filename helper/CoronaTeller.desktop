@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=CoronaTeller
+Comment=
+Exec=/home/pi/start.sh
+StartupNotify=false
+Terminal=false
+Hidden=false
