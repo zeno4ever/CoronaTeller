@@ -25,8 +25,9 @@ when started you can
 # Installation
 
 ## Needed hardware / software
-- Raspberry 4 (maybe a 3 will work also?)
+- Raspberry 4/3 
 - SD card with : Raspberry Pi OS (32-bit) with desktop, version May 2020. This version include python3, pygame and the bluetooth binarys.
+- Screen that is able to handle resolution of 1920x1080 (is hardcode in code)
 
 ## Software
 On the first Startup go trough welcome wizard (this includes a software update). 

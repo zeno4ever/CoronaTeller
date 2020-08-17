@@ -22,7 +22,7 @@ else:
 # maxium beacons that fits onscreen
 maxscreenBeacons = 18*2  # 18 lines 2 coloms
 # time in secs when beacon is no longer valid. Should be 25min for Covid EN BLE
-maxtimeBeacons = 25*60 
+maxtimeBeacons = 30#25*60 
 
 # scan functions
 def callback(bt_addr, rssi, packet, additional_info):
@@ -115,6 +115,7 @@ scanfont = pygame.font.Font('./fonts/Orbitron-Bold.ttf', 70)
 shafont = pygame.font.Font("./fonts/VT323-Regular.ttf", 70)
 footerfont = pygame.font.Font('./fonts/Orbitron-Regular.ttf', 40)
 footerfontsmall = pygame.font.Font('./fonts/Orbitron-Regular.ttf', 20)
+pygame.mouse.set_visible(False)
 
 done = False
 while not done:
