@@ -6,8 +6,10 @@ import importlib
 #import sys
 from hashlib import md5
 from datetime import datetime
+from importlib import util
 
-beacontoolsModule = importlib.util.find_spec("beacontools")
+
+beacontoolsModule = util.find_spec("beacontools")
 
 if beacontoolsModule:
     from beacontools import BeaconScanner, ExposureNotificationFrame
