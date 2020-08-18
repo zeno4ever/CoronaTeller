@@ -7,13 +7,14 @@ import os
 import sys
 from hashlib import md5
 from datetime import datetime
+from importlib import util
 
 headless = False
 if '-cli' in sys.argv:
     os.environ["SDL_VIDEODRIVER"] = "dummy"
     headless = True
     
-beacontoolsModule = importlib.util.find_spec("beacontools")
+beacontoolsModule = util.find_spec("beacontools")
 
 if beacontoolsModule:
     from beacontools import BeaconScanner, ExposureNotificationFrame
