@@ -5,16 +5,28 @@ import time
 import importlib
 import os
 import sys
+import serial
+import json
 from hashlib import md5
 from datetime import datetime
 from importlib import util
 
-headless = False
 if '-cli' in sys.argv:
     os.environ["SDL_VIDEODRIVER"] = "dummy"
     headless = True
-    
-beacontoolsModule = util.find_spec("beacontools")
+else:
+    headless = False
+
+# ser = None    
+if '-dev' in sys.argv:
+    ser = serial.Serial('/dev/cu.SLAB_USBtoUART',115200, timeout=0)
+    esp32 = True
+else: 
+    esp32 = False
+
+
+beacontoolsModule = util.find_spec("beacontools") and False
+
 
 if beacontoolsModule:
     from beacontools import BeaconScanner, ExposureNotificationFrame
@@ -43,6 +55,26 @@ if beacontoolsModule:
                             packet_filter=[ExposureNotificationFrame]
     )
     scanner.start()
+
+
+def parseSerial():
+    global ser
+    #{"mac":"68:cd:30:be:74:40", "rssi":-65, "rpi":"a4deabca1f93b9a244bb9c87360377f5", "aem":"eca7f4be"}
+    if ser.is_open:
+        serialData = ser.readlines()
+        print(len(serialData))
+        for line in serialData[4:]: #only proces first 4 
+            data = json.loads(line)
+            #   print("$$"+data+"$$")
+    
+            #print(data['rpi'])
+            tempbeacon = findTexthash(data['rpi'])
+            if tempbeacon is None:
+                addbeacon(Beacon(data['rpi'], data['rssi']))
+            else:
+                tempbeacon.lastseen = time.time()
+                tempbeacon.rssi = data['rssi']
+    ser.flush
 
 #Classes and other objects
 class Beacon:
@@ -104,6 +136,13 @@ def cleanupbeaconlist():
             if len(available)>0:
                 beacon.pos = random.choice(available)                
 
+def stopTeller():
+    global ser
+    if beacontoolsModule:
+        scanner.stop()
+    if ser.is_open:
+        ser.close()
+    done = True
 
 # define the RGB value for white,
 #  green, blue colour .
@@ -138,13 +177,9 @@ while not done:
     now = time.time()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            if beacontoolsModule:
-                scanner.stop()
-            done = True
+            stopTeller()
         if event.type == pygame.KEYDOWN and event.key == pygame.K_q:
-            if beacontoolsModule:
-                scanner.stop()
-            done = True
+            stopTeller()
         if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
             fillfakebeacon(7)
         if event.type == pygame.KEYDOWN and event.key == pygame.K_c:
@@ -231,5 +266,8 @@ while not done:
     if now-lastcleanup > 10: #run cleanup every n sec 
         cleanupbeaconlist()
         lastcleanup=now
+
+    if esp32:
+        parseSerial()
 
     pygame.time.delay(100) #wait in mili secs

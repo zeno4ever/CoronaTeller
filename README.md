@@ -28,6 +28,7 @@ when started you can
 - Raspberry 4/3 
 - SD card with : Raspberry Pi OS (32-bit) with desktop, version May 2020. This version include python3, pygame and the bluetooth binarys.
 - Screen that is able to handle resolution of 1920x1080 (is hardcode in code)
+- For nonlinux systems can't use bluez, you can use an ESP32 as beacon scanner. Check [ESP32 Exposure notificaton scanner](https://github.com/renzenicolai/esp32-exposure-notificaton-scanner). Use e.g. " -dev /dev/ttyUSB0" to enable this.
 
 ## Software
 On the first Startup go trough welcome wizard (this includes a software update). 
@@ -65,6 +66,22 @@ In Desktop menu, under 'Preferences', -> 'Raspberry Pi Configuration' you might 
     - SSH and/or VNC : Enable for remote access if needed.
 - Performance tabpage
     - Overlay File System : Overlay Enable and Boot Partition Read-only (do this as last option)
+
+## Specifications of Exposure Notification
+- [beacons](https://covid19-static.cdn-apple.com/applications/covid19/current/static/contact-tracing/pdf/ExposureNotification-BluetoothSpecificationv1.2.pdf)
+- [Framework](https://www.apple.com/covid19/contacttracing)
+
+## Trouble shooting
+
+To check what beacons is visable to bluez / os
+```bash
+	$ bluetoothctl
+	[bluetoothctl]scan.transport le
+	[bluetoothctl]scan.uuids 0xfd6f
+	[bluetoothctl]scan on
+```
+
+I included testtool 'testbeacontool.py' so you can see what the scanner will see.
 
 # Licence
 If you want to use it commercial please contact me for the possibilities. You want to have your own CoronaTeller but don't know how to make this contact [me](mailto:dave@twenspace.nl), for a small fee I can create one for you.
