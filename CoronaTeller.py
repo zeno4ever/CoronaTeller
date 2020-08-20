@@ -168,8 +168,8 @@ pygame.init()
 if os.environ.get('SDL_VIDEODRIVER') == 'dummy':
     screen = pygame.display.set_mode((1, 1))
 else:    
-    #screen = pygame.display.set_mode((1920, 1080), pygame.FULLSCREEN)
-    screen = pygame.display.set_mode((1920, 1080))
+    screen = pygame.display.set_mode((1920, 1080), pygame.FULLSCREEN)
+    #screen = pygame.display.set_mode((1920, 1080))
 
 screenX, screenY = pygame.display.get_surface().get_size()
 
@@ -275,9 +275,7 @@ while not done:
 
     #do every xx min.
     #if now-lastcleanup > 10: #run cleanup every n sec 
-    print("Start cleaning.")
     cleanupbeaconlist()
     #    lastcleanup=now
-    print("Done cleaning")
 
     pygame.time.delay(10) #wait in mili secs
