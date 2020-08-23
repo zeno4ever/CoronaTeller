@@ -18,6 +18,9 @@ The CoronaMelder app is based on the [DP-3T](https://github.com/DP-3T/documents)
 
 The CoronaTeller doesn't store any data, it only shows the beacons that are seen the last 20 seconds.
 
+The CoronaTeller is also shown on the [GOGBOT 2020](https://2020.gogbot.nl/portfolio/dave-borghuis-hackerspace-tkkrlab/)
+
+
 ## Using the program
 when started you can
 - Exposure Notification Beacons wil be scanned and total number showed.
@@ -43,7 +46,7 @@ If you want to use the beacontools option (check [bug](https://github.com/zeno4e
 
 ```bash
 	pip3 install beacontools pybluez
-    sudo setcap 'cap_net_raw,cap_net_admin+eip' /usr/bin/python3.7
+	sudo setcap 'cap_net_raw,cap_net_admin+eip' /usr/bin/python3.7
 ```
 Take a extra note of the **setcap** command, if you forget to do this everything seems to work but no beacons wil be seen !!
 
