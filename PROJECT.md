@@ -1,6 +1,6 @@
 ---
 title: "CoronaTeller"
-date: 2020-09-23
+date: 2020-08-23
 thumbnail: "https://raw.githubusercontent.com/TkkrLab/CoronaTeller/master/coronateller.png"
 ---
 
