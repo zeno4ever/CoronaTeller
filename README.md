@@ -42,13 +42,14 @@ On the first boot of Raspberry Pi startup go trough welcome wizard (this include
 All following commands asume that you install it in the home directory of user 'pi'.
 
 ### Beacontools
-If you want to use the beacontools option (check [bug](https://github.com/zeno4ever/CoronaTeller/issues/3) ) :
+If you want to use the beacontools option :
 
 ```bash
 	pip3 install beacontools pybluez
 	sudo setcap 'cap_net_raw,cap_net_admin+eip' /usr/bin/python3.7
 ```
 Take a extra note of the **setcap** command, if you forget to do this everything seems to work but no beacons wil be seen !!
+Be sure to install version >=2.02 of beacontools, olders versions contains a bug so you can't see Android phones.
 
 ### CoronaTeller pygame app
 And install the CoronaTeller app by :
