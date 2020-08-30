@@ -37,7 +37,7 @@ if args.esp32 is not None:
 else:
     esp32 = False
 
-beacontoolsModule = util.find_spec("beacontools") and False
+beacontoolsModule = util.find_spec("beacontools")
 
 if beacontoolsModule:
     from beacontools import BeaconScanner, ExposureNotificationFrame
