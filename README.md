@@ -26,18 +26,20 @@ when started you can
 - Exposure Notification Beacons wil be scanned and total number showed.
 - press spacebar to add 'virtual' beacons
 - press q to quit program
-- You can use an ESP32 as beacon scanner. Check [ESP32 Exposure notificaton scanner](https://github.com/renzenicolai/esp32-exposure-notificaton-scanner). Use e.g. " --esp32 /dev/ttyUSB0" to enable this.
 - If you want to run it you on a headless system use the "--cli" option 
+
+If you don't run on a linux system (and can't use the bleuz stack) you can use a external scanner. For this use an ESP32 as beacon scanner. Check [ESP32 Exposure notificaton scanner](https://github.com/renzenicolai/esp32-exposure-notificaton-scanner). Use e.g. " --esp32 /dev/ttyUSB0" to enable this.
 
 # Installation
 
 ## Needed hardware / software
 - Raspberry 3 or 4 
 - SD card with : Raspberry Pi OS (32-bit) with desktop, version May 2020. This version include python3, pygame and the bluetooth binarys.
-- Screen that is able to handle resolution of 1920x1080 (is hardcode in code)
+- Screen that is able to handle resolution of 1920x1080 (is hardcode in code).
+- be sure you use beacontools >= 2.02 (or you won't see Android phones).
 
 ## Software
-On the first boot of Raspberry Pi startup go trough welcome wizard (this includes a software update).
+On the first boot of Raspberry Pi startup go trough the Pi welcome wizard (this includes a software update).
 
 All following commands asume that you install it in the home directory of user 'pi'.
 

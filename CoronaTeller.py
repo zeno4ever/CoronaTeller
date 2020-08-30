@@ -161,8 +161,9 @@ def stopTeller():
     global ser
     if beacontoolsModule:
         scanner.stop()
-    if ser.is_open:
-        ser.close()
+    if esp32:
+        if ser.is_open:
+            ser.close()
     done = True
     quit()
 
