@@ -9,7 +9,8 @@ De CoronaMelder is gebaseerd op het [DP-3T](https://github.com/DP-3T/documents) 
 
 De CoronaTeller houd geen gegevens bij, het laat alleen de beacons zien die de laatse 20 seconden zijn gezien.
 
-De CoronaTeller word ook getoond op de expositie van [GOGBOT 2020](https://2020.gogbot.nl/portfolio/dave-borghuis-hackerspace-tkkrlab/)
+De CoronaTeller word ook getoond op de expositie van [GOGBOT 2020](https://2020.gogbot.nl/portfolio/dave-borghuis-hackerspace-tkkrlab/). Er zijn tijdens de GOGBOT 4775 beacons gezien.
+
 
 ## English
 From the 1st of September the CoronaMelder app should be available in the Netherlands. This app send bluetooth beacons which are visible with the right hard- and software. With CoronaTeller Dave Borghuis in cooperation Hackerspace TkkrLab Enschede these beacons visible.
@@ -18,7 +19,8 @@ The CoronaMelder app is based on the [DP-3T](https://github.com/DP-3T/documents)
 
 The CoronaTeller doesn't store any data, it only shows the beacons that are seen the last 20 seconds.
 
-The CoronaTeller is also shown on the [GOGBOT 2020](https://2020.gogbot.nl/portfolio/dave-borghuis-hackerspace-tkkrlab/)
+The CoronaTeller is also shown on the [GOGBOT 2020](https://2020.gogbot.nl/portfolio/dave-borghuis-hackerspace-tkkrlab/). During the GOGBOT there were 4775 beacons seen.
+
 
 
 ## Using the program
